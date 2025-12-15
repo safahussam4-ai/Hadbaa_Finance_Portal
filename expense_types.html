@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="page-title">أنواع المصروفات</h2>
+<div class="card">
+  <form method="post" class="form-grid">
+    <input type="hidden" name="action" value="create">
+    <label>
+      <span>اسم نوع المصروف الجديد</span>
+      <input type="text" name="name" required>
+    </label>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">إضافة</button>
+    </div>
+  </form>
+</div>
+<div class="card">
+  <table class="table">
+    <thead><tr><th>#</th><th>الاسم</th><th>مفعل؟</th><th>إجراء</th></tr></thead>
+    <tbody>
+      {% for t in rows %}
+      <tr>
+        <td>{{ t['id'] }}</td>
+        <td>
+          <form method="post" style="display:flex;gap:4px;">
+            <input type="hidden" name="id" value="{{ t['id'] }}">
+            <input type="hidden" name="action" value="update">
+            <input type="text" name="name" value="{{ t['name'] }}">
+            <button class="btn btn-primary">حفظ</button>
+          </form>
+        </td>
+        <td>{{ 'نعم' if t['is_active'] else 'لا' }}</td>
+        <td>
+          <form method="post">
+            <input type="hidden" name="id" value="{{ t['id'] }}">
+            <input type="hidden" name="action" value="toggle">
+            <button class="btn btn-ghost">تفعيل/تعطيل</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

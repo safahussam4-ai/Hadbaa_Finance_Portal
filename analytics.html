@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="page-title">التحليلات المالية</h2>
+<div class="card">
+  <h3>إجمالي المصروفات حسب القسم</h3>
+  <table class="table">
+    <thead><tr><th>القسم</th><th>الإجمالي</th></tr></thead>
+    <tbody>
+      {% for r in by_dept %}
+      <tr><td>{{ r['department'] }}</td><td>{{ r['total'] }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<div class="card">
+  <h3>إجمالي المصروفات حسب نوع المصروف</h3>
+  <table class="table">
+    <thead><tr><th>النوع</th><th>الإجمالي</th></tr></thead>
+    <tbody>
+      {% for r in by_expense %}
+      <tr><td>{{ r['expense_type'] }}</td><td>{{ r['total'] }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<div class="card">
+  <h3>إجمالي الطلبات حسب الشهر</h3>
+  <table class="table">
+    <thead><tr><th>الشهر</th><th>الإجمالي</th></tr></thead>
+    <tbody>
+      {% for r in by_month %}
+      <tr><td>{{ r['ym'] }}</td><td>{{ r['total'] }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

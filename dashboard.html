@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="page-title">لوحة التحكم</h2>
+<div class="card">
+  <h3>إحصائيات الحالات</h3>
+  <table class="table">
+    <thead><tr><th>الحالة</th><th>عدد الطلبات</th></tr></thead>
+    <tbody>
+    {% for s in stats %}
+      <tr><td>{{ s['status'] }}</td><td>{{ s['c'] }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <h3>أحدث طلباتي</h3>
+  {% if my_requests %}
+  <table class="table">
+    <thead>
+      <tr><th>#</th><th>القسم</th><th>الوصف</th><th>نوع المصروف</th><th>المبلغ</th><th>الحالة</th></tr>
+    </thead>
+    <tbody>
+      {% for r in my_requests %}
+      <tr>
+        <td>{{ r['id'] }}</td>
+        <td>{{ r['department'] }}</td>
+        <td>{{ r['item_description'] }}</td>
+        <td>{{ r['expense_type_name'] or '-' }}</td>
+        <td>{{ r['estimated_total'] }}</td>
+        <td>{{ r['status'] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+    <div class="empty-state">لا توجد طلبات حديثة.</div>
+  {% endif %}
+</div>
+{% endblock %}

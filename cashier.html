@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="page-title">طلبات جاهزة للصرف</h2>
+{% if rows %}
+<table class="table">
+  <thead><tr><th>#</th><th>القسم</th><th>الوصف</th><th>المبلغ</th><th>إجراء</th></tr></thead>
+  <tbody>
+  {% for r in rows %}
+    <tr>
+      <td>{{ r['id'] }}</td>
+      <td>{{ r['department'] }}</td>
+      <td>{{ r['item_description'] }}</td>
+      <td>{{ r['estimated_total'] }}</td>
+      <td><a href="{{ url_for('disburse', rid=r['id']) }}" class="btn btn-primary">صرف</a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+  <div class="empty-state">لا توجد طلبات جاهزة للصرف.</div>
+{% endif %}
+{% endblock %}

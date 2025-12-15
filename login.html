@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="page-title">تسجيل الدخول</h2>
+<div class="card" style="max-width:400px;">
+  <form method="post" class="form-grid">
+    <label>
+      <span>اسم المستخدم</span>
+      <input type="text" name="username" required>
+    </label>
+    <label>
+      <span>كلمة المرور</span>
+      <input type="password" name="password" required>
+    </label>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">دخول</button>
+    </div>
+  </form>
+  <div style="margin-top:8px;font-size:11px;color:#9ca3af;">
+    حسابات تجريبية: requester / fund_manager / finance_manager / president / cashier (الكل كلمة المرور 123456)
+  </div>
+</div>
+{% endblock %}

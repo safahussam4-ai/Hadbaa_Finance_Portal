@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="page-title">صرف طلب رقم {{ req['id'] }}</h2>
+<div class="card">
+  <p>القسم: {{ req['department'] }}</p>
+  <p>الوصف: {{ req['item_description'] }}</p>
+  <p>المبلغ التقديري: {{ req['estimated_total'] }}</p>
+</div>
+<form method="post" class="form-grid">
+  <div class="card">
+    <label>
+      <span>المبلغ المصروف</span>
+      <input type="number" name="amount" step="1000" min="0" required>
+    </label>
+    <label>
+      <span>رقم الوصل</span>
+      <input type="text" name="receipt_no" required>
+    </label>
+    <label>
+      <span>تاريخ الصرف</span>
+      <input type="date" name="receipt_date" required>
+    </label>
+  </div>
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">تسجيل الصرف</button>
+    <a href="{{ url_for('cashier_dashboard') }}" class="btn btn-ghost">رجوع</a>
+  </div>
+</form>
+{% endblock %}

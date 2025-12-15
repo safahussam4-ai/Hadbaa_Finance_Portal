@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="page-title">الطلبات</h2>
+{% if rows %}
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th><th>القسم</th><th>الوصف</th><th>نوع المصروف</th><th>المبلغ</th><th>الحالة</th><th>إجراء</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for r in rows %}
+    <tr>
+      <td>{{ r['id'] }}</td>
+      <td>{{ r['department'] }}</td>
+      <td>{{ r['item_description'] }}</td>
+      <td>{{ r['expense_type_name'] or '-' }}</td>
+      <td>{{ r['estimated_total'] }}</td>
+      <td>{{ r['status'] }}</td>
+      <td>
+        {% if user['role'] in ['fund_manager','finance_manager','president'] %}
+        <form method="post" action="{{ url_for('request_decision', rid=r['id']) }}" style="display:flex;gap:4px;">
+          <button name="action" value="approve" class="btn btn-primary">موافقة</button>
+          <button name="action" value="reject" class="btn btn-danger">رفض</button>
+        </form>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+  <div class="empty-state">لا توجد بيانات.</div>
+{% endif %}
+{% endblock %}

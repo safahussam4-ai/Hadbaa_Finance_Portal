@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="page-title">التقارير</h2>
+<div class="card">
+  <p>اختيار تقرير للتصدير إلى Excel:</p>
+  <ul>
+    <li><a href="{{ url_for('reports_export', kind='unpaid') }}">الطلبات غير المصروفة</a></li>
+    <li><a href="{{ url_for('reports_export', kind='rejected') }}">الطلبات المرفوضة</a></li>
+    <li><a href="{{ url_for('reports_export', kind='pending') }}">الطلبات قيد المراجعة</a></li>
+    <li><a href="{{ url_for('reports_export', kind='paid') }}">الطلبات المدفوعة</a></li>
+  </ul>
+</div>
+{% endblock %}
